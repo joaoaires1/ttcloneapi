@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\Api\Authenticate\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('login', function (){
-    return [
-        'foo' => 'bared'
-    ];
-});
+Route::post('register', [RegisterController::class, 'register']);
