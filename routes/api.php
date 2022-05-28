@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\Api\Authenticate\RegisterController;
+use \App\Http\Controllers\Api\Authenticate\AuthenticateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,4 +14,5 @@ use \App\Http\Controllers\Api\Authenticate\RegisterController;
 |
 */
 
-Route::post('register', [RegisterController::class, 'register']);
+Route::post('register', [AuthenticateController::class, 'register']);
+Route::post('login', [AuthenticateController::class, 'login']);
