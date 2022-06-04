@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Api\Authenticate\AuthenticateController;
+use \App\Http\Controllers\Api\Follow\FollowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,12 @@ use \App\Http\Controllers\Api\Authenticate\AuthenticateController;
 |
 */
 
-Route::post('register', [AuthenticateController::class, 'register']);
-Route::post('login', [AuthenticateController::class, 'login']);
+Route::controller(AuthenticateController::class)->group(function () {
+    Route::post('register', 'register');
+    Route::post('login', 'login');
+});
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('follow', [FollowController::class, 'follow']);
+    Route::post('unfollow', [FollowController::class, 'unfollow']);
+});
