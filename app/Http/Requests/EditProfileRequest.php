@@ -5,30 +5,34 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 
-class RegisterRequest extends FormRequest
+class EditProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize(): bool
+    public function authorize()
     {
         return true;
     }
 
-    public function rules(): array
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
     {
         return [
-            'name'      => 'required',
-            'username'  => 'required|unique:users',
-            'email'     => 'required|email|unique:users',
-            'password'  => 'required'
+            'name' => 'required|string',
+            'photo' => 'image|mimes:png,jpg,jpeg'
         ];
     }
 
-    protected function failedValidation(Validator $validator): HttpResponseException
+    protected function failedValidation(Validator $validator): JsonResponse
     {
         throw new HttpResponseException(
             response()->json(

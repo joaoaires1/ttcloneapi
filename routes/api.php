@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Authenticate\AuthenticateController;
 use App\Http\Controllers\Api\Follow\FollowController;
 use App\Http\Controllers\Api\Post\PostController;
+use App\Http\Controllers\Api\Profile\ProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,5 +31,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::controller(PostController::class)->group(function () {
         Route::post('post', 'storePost');
         Route::get('posts', 'getPosts');
+    });
+
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('search', 'search');
+        Route::post('edit_profile', 'edit');
     });
 });
